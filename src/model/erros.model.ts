@@ -1,11 +1,11 @@
 export class AppError {
   constructor(
     public message: string,
-    public staus: number,
+    public status: number,
     public data?: any
   ) {
     this.message = message
-    this.staus = staus
+    this.status = status
     this.data = data
   }
 }
