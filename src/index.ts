@@ -4,6 +4,7 @@ import * as dotenv from 'dotenv'
 import { routersV1 } from './router/index.router'
 import { AppError } from './model/erros.model'
 import { HttpStatus } from './utils/http-status'
+import { connection } from './config/database/connection'
 
 dotenv.config()
 const app = express()
@@ -33,6 +34,7 @@ app.use((err: ErrorRequestHandler | Error | AppError, req: Request, res: Respons
 
 const port = process.env.PORT || 3000
 const ambient = process.env.NODE_ENV || 'develop'
-app.listen(port, ()=>{
+app.listen(port, async () => {
+  await connection()
   console.log(`Aplicação inicou na porta ${port} no ambiente ${ambient}`)
 })
