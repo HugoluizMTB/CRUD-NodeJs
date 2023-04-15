@@ -1,19 +1,25 @@
 import 'express-async-errors'
 import express, { ErrorRequestHandler, NextFunction, Request, Response } from 'express'
 import * as dotenv from 'dotenv'
-import { routersV1 } from './router/index.router'
+import { routers } from './router/index.router'
 import { AppError } from './model/erros.model'
 import { HttpStatus } from './utils/http-status'
 import { connection } from './config/database/connection'
+import { initializePassport } from './config/authentication/strategy.passport'
+import cors from 'cors'
 
 dotenv.config()
 const app = express()
+
+initializePassport()
+
+app.use(cors())
 
 app.use(express.json())
 
 app.use(express.static('public'))
 
-app.use('/api', routersV1)
+app.use('/api', routers)
 
 app.use('*', (req: Request, res: Response) => {
   throw new AppError('Rota não encontrada', HttpStatus.NOT_FOUND)

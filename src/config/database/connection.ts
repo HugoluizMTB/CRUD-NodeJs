@@ -14,7 +14,7 @@ export const connection = async () => {
       user,
       pass,
       dbName,
-      replicaSet,
+      replicaSet, 
       autoCreate: true
     })
     console.log('Conexão criado com sucesso')

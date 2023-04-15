@@ -1,10 +1,13 @@
 import { Router } from "express"
-import userRouter from "./user.router"
+import {userRouter, userRouterV2} from "./user.router"
+import { authRouter } from "./auth.router"
 
-const routersV1 = Router()
+const routers = Router()
 
-routersV1.use('/v1', userRouter)
+
+routers.use('/v1', userRouter, authRouter),
+routers.use('/v2', userRouterV2) 
 
 export {
-  routersV1
+  routers
 }
